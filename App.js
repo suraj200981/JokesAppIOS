@@ -1,13 +1,15 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import HomeScreen from "./src/screens/HomeScreen";
+import RandomJokeScreen from "./src/screens/RandomJokeScreen";
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
+    Random: RandomJokeScreen
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Random",
     defaultNavigationOptions: {
       title: "Joke App v1",
       //change title color
