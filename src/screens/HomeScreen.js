@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import { Linking } from 'react-native';
-import axios from 'axios';
 
 
 const HomeScreen = (props) => {
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
     marginTop:20,
     marginBottom:5,
-    marginLeft:31,
+    marginLeft:44,
   },
   containerForCats1:{
     flexDirection:'row',

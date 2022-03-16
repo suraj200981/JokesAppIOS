@@ -7,41 +7,67 @@ const RandomJokeScreen = () => {
    
 
     //state variable for setup
-    const [setupState, setSetupState] = useState("What do you call a developer who doesn't comment code?");
+    const [setupStatevar, setSetupState] = useState("What do you call a developer who doesn't comment code?");
     //state variable for punchline
-    const [punchlineState, setPunchlineState] = useState("A developer.");
-     function getJoke() {
+    const [punchlineStatevar, setPunchlineState] = useState("A developer.");
 
-      
-        axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,racist,sexist&type=twopart&idRange=1-319', {
+    //state variable for array to store all the setups
+    const [setupArray, setSetupArray] = useState([]);
+
+    //state variable for array to store all the punchlines
+    const [punchlineArray, setPunchlineArray] = useState([]);
+
+     function nextJoke() {
+        axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,racist,sexist&type=twopart&idRange=1-319&amount=10', {
           headers: {
             Accept: 'application/json'
           }
         }).then(response => {
-          console.log(response.data.setup);
           setSetupState(response.data.setup);
-          console.log(response.data.delivery);
+          setSetupArray([...setupArray, setupStatevar]);
+
           setPunchlineState(response.data.delivery);
+          setPunchlineArray([...punchlineArray, punchlineStatevar]);
+
+          console.log(setupArray);
+        }).catch(error => {
+          console.log(error);
         });
       };
+
+      function previousJoke() {
+          if (setupArray.length > 0) {
+            setupArray.pop();
+            setSetupState(setupArray[setupArray.length - 1]);
+            punchlineArray.pop();
+            setPunchlineState(punchlineArray[punchlineArray.length - 1]);
+
+          }else{
+            setSetupState("What do you call a developer who doesn't comment code?");
+            alert("There is no previous joke!");
+          }
+
+      }
     
   return (
     <View style={styles.container}>
      <View style={styles.jokesWindow}>
      <Text style={styles.jokeSetupTitle}>Setup:</Text>
 
-        <Text style={styles.jokeTitle}>{setupState}</Text>
+        <Text style={styles.jokeTitle}>{setupStatevar}</Text>
         <Text style={styles.jokeSetupTitle}>Delivery:</Text>
-        <Text style={styles.jokeTitle}>{punchlineState}</Text>
+        <Text style={styles.jokeTitle}>{punchlineStatevar}</Text>
      </View>
         <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>←</Text>
+                <Text style={styles.buttonText} onPress={() => {
+                    previousJoke();
+                }}>←</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText} onPress={()=>{
-                    console.log("button pressed");
-                    getJoke();
+                    console.log("Next button pressed");
+                    nextJoke();
                 }}>→</Text>
             </TouchableOpacity>
         </View>
