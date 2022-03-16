@@ -17,8 +17,10 @@ const RandomJokeScreen = () => {
     //state variable for array to store all the punchlines
     const [punchlineArray, setPunchlineArray] = useState([]);
 
+    var count = 0;
      function nextJoke() {
-        axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,racist,sexist&type=twopart&idRange=1-319&amount=10', {
+        count = count + 1;
+        axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,racist,sexist&type=twopart&idRange=1-319', {
           headers: {
             Accept: 'application/json'
           }
@@ -36,7 +38,8 @@ const RandomJokeScreen = () => {
       };
 
       function previousJoke() {
-          if (setupArray.length > 0) {
+          count = count - 1;
+          if (setupArray.length >0) {
             setupArray.pop();
             setSetupState(setupArray[setupArray.length - 1]);
             punchlineArray.pop();
@@ -44,6 +47,7 @@ const RandomJokeScreen = () => {
 
           }else{
             setSetupState("What do you call a developer who doesn't comment code?");
+            setPunchlineState("A developer.")
             alert("There is no previous joke!");
           }
 

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   creatorInfo:{
     fontSize:15,
     color:'white',
-    marginTop:190,
+    marginTop:265,
     marginRight:20,
     fontWeight:'900',
     textAlign:'right',
