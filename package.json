@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdi/react": "^1.5.0",
     "@react-native-community/masked-view": "0.1.10",
+    "axios": "^0.26.1",
     "expo": "^44.0.0",
     "expo-status-bar": "~1.2.0",
     "mdi-react": "^8.2.0",

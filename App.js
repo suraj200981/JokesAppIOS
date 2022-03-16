@@ -9,7 +9,7 @@ const navigator = createStackNavigator(
     Random: RandomJokeScreen
   },
   {
-    initialRouteName: "Random",
+    initialRouteName: "Home",
     defaultNavigationOptions: {
       title: "Joke App v1",
       //change title color

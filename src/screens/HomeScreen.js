@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import { Linking } from 'react-native';
+import axios from 'axios';
+
 
 const HomeScreen = (props) => {
+
   return (
     <View style={styles.container}>
         <Text style={styles.homeTitle}>Pick a category</Text>
