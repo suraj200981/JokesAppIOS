@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, Vibration} from 'react-native';
 import axios from 'axios';
 
 
@@ -58,6 +58,8 @@ const RandomJokeScreen = () => {
             if(count<1){
               setCount(1);
               alert("There is no previous joke!");
+              //vibrate for 400ms
+            Vibration.vibrate(400);
           }else{
             count--;
             console.log(setupArray[count]);
@@ -69,6 +71,8 @@ const RandomJokeScreen = () => {
             setSetupState("What do you call a developer who doesn't comment code?");
             setPunchlineState("A developer.")
             alert("There is no previous joke!");
+            //vibrate for 400ms
+            Vibration.vibrate(10000);
           }
 
       }
@@ -99,12 +103,16 @@ const RandomJokeScreen = () => {
         <View>
         <Text style={{fontSize:30, textAlign: 'center', fontWeight: 'bold'}}>Select joke type:</Text>
         <TouchableOpacity onPress={()=>{
+                      Vibration.vibrate(100);
+
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Single joke</Text>
       </View>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={()=>{
+                    Vibration.vibrate(100);
+
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Two part joke</Text>
       </View>
