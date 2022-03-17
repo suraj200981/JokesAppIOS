@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 
 
@@ -95,6 +95,23 @@ const RandomJokeScreen = () => {
                 }}>→</Text>
             </TouchableOpacity>
         </View>
+
+        <View>
+        <Text style={{fontSize:30, textAlign: 'center', fontWeight: 'bold'}}>Select joke type:</Text>
+        <TouchableOpacity onPress={()=>{
+        }}><View style={styles.jokeTypeButton}>
+        <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Single joke</Text>
+      </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={()=>{
+        }}><View style={styles.jokeTypeButton}>
+        <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Two part joke</Text>
+      </View>
+      </TouchableOpacity>
+
+
+        </View>
     </View>
 
   );
@@ -155,8 +172,19 @@ buttonText:{
         overflow: 'hidden',
         textAlign: 'center',
         paddingTop: 15,
-
-
+    },
+    jokeTypeButton: {
+      color: 'white',
+      alignSelf: 'center',
+        fontSize: 34,
+        backgroundColor: '#070503',
+        width: 300,
+        height: 70,
+        borderRadius:10,
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingTop: 15,
+        marginTop: 20,
     }
 
 });
