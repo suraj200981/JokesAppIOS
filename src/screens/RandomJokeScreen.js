@@ -7,19 +7,28 @@ const RandomJokeScreen = () => {
    
 
     //state variable for setup
-    const [setupStatevar, setSetupState] = useState("What do you call a developer who doesn't comment code?");
+    var [setupStatevar, setSetupState] = useState("What do you call a developer who doesn't comment code?");
     //state variable for punchline
-    const [punchlineStatevar, setPunchlineState] = useState("A developer.");
+    var [punchlineStatevar, setPunchlineState] = useState("A developer.");
 
     //state variable for array to store all the setups
-    const [setupArray, setSetupArray] = useState([]);
+    var [setupArray, setSetupArray] = useState(["What do you call a developer who doesn't comment code?"]);
 
     //state variable for array to store all the punchlines
-    const [punchlineArray, setPunchlineArray] = useState([]);
+    var [punchlineArray, setPunchlineArray] = useState(["A developer."]);
 
-    var count = 0;
+    //state variable for count
+    var [count, setCount] = useState(0);
      function nextJoke() {
-        count = count + 1;
+
+      if(setupArray.length-1 != count){
+        setSetupState(setupArray[count+1]);
+        setPunchlineState(punchlineArray[count+1]);
+        setCount(count+1);
+      }else{
+      console.log("Element at index 0: "+setupArray[0])
+        setCount(count + 1);
+        console.log(count);
         axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,racist,sexist&type=twopart&idRange=1-319', {
           headers: {
             Accept: 'application/json'
@@ -35,15 +44,26 @@ const RandomJokeScreen = () => {
         }).catch(error => {
           console.log(error);
         });
+      }
       };
 
       function previousJoke() {
-          count = count - 1;
-          if (setupArray.length >0) {
-            setupArray.pop();
-            setSetupState(setupArray[setupArray.length - 1]);
-            punchlineArray.pop();
-            setPunchlineState(punchlineArray[punchlineArray.length - 1]);
+
+
+
+          if (setupArray.length >1) {
+            setCount(count - 1);
+            console.log(count);
+
+            if(count<1){
+              setCount(1);
+              alert("There is no previous joke!");
+          }else{
+            count--;
+            console.log(setupArray[count]);
+            setSetupState(setupArray[count]);
+            setPunchlineState(punchlineArray[count]);
+          }
 
           }else{
             setSetupState("What do you call a developer who doesn't comment code?");
@@ -103,7 +123,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginTop:10,
     marginBottom:20,
-    fontWeight: '100',
+    fontWeight: '300',
     textAlign: 'center'
 },
   jokesWindow: {
