@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const RandomJokeScreen = () => {
    
+    //state variable for joke type
+    const [jokeType, setJokeType] = useState('twoPart');
 
     //state variable for setup
     var [setupStatevar, setSetupState] = useState("What do you call a developer who doesn't comment code?");
@@ -19,6 +21,7 @@ const RandomJokeScreen = () => {
 
     //state variable for count
     var [count, setCount] = useState(0);
+
      function nextJoke() {
 
       if(setupArray.length-1 != count){
@@ -47,10 +50,11 @@ const RandomJokeScreen = () => {
       }
       };
 
+      function singleJoke(){
+        setJokeType(jokeType = 'single');
+      }
+
       function previousJoke() {
-
-
-
           if (setupArray.length >1) {
             setCount(count - 1);
             console.log(count);
@@ -104,6 +108,7 @@ const RandomJokeScreen = () => {
         <Text style={{fontSize:30, textAlign: 'center', fontWeight: 'bold'}}>Select joke type:</Text>
         <TouchableOpacity onPress={()=>{
                       Vibration.vibrate(100);
+                    //  singleJoke();
 
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Single joke</Text>
