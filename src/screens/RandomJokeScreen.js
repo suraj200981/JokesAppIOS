@@ -29,7 +29,7 @@ const RandomJokeScreen = () => {
         setPunchlineState(punchlineArray[count+1]);
         setCount(count+1);
       }else{
-        if(jokeType===true){
+        if(jokeType==true){
       console.log("Element at index 0: "+setupArray[0])
         setCount(count + 1);
         console.log(count);
@@ -50,7 +50,7 @@ const RandomJokeScreen = () => {
         });
       }
         //single joke
-        else if(jokeType===false){
+        else if(jokeType==false){
           console.log("Element at index 0: "+setupArray[0])
         setCount(count + 1);
         console.log(count);
@@ -59,7 +59,7 @@ const RandomJokeScreen = () => {
             Accept: 'application/json'
           }
         }).then(response => {
-          setSetupState(response.data.setup);
+          setSetupState(response.data.joke);
           setSetupArray([...setupArray, setupStatevar]);
 
           console.log(setupArray);
