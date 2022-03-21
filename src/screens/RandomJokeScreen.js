@@ -71,26 +71,29 @@ const RandomJokeScreen = () => {
       };
 
       function singleJoke(){
+
         //set joke type to true
         setJokeType(jokeType = false);
         console.log("Joke type: "+ jokeType);
         //set setup state to setup
         setSetupState(setupStatevar = "Never date a baker. They're too kneady.");
-      
       }
 
       function twoPartJoke(){
+        //set count to 0 
+        setCount(0);
+        //reset setup array 
+        setSetupArray([]);
+        setSetupArray(setupArray = ["What do you call a developer who doesn't comment code?"]);
         setJokeType(jokeType = true);
         console.log("Joke type: "+ jokeType);
         setSetupState(setupStatevar = "What do you call a developer who doesn't comment code?");
-
       }
 
       function previousJoke() {
           if (setupArray.length >1) {
             setCount(count - 1);
             console.log(count);
-
             if(count<1){
               setCount(1);
               alert("There is no previous joke!");
@@ -150,8 +153,12 @@ const RandomJokeScreen = () => {
         <View>
         <Text style={{fontSize:30, textAlign: 'center', fontWeight: 'bold'}}>Select joke type:</Text>
         <TouchableOpacity onPress={()=>{
-                     Vibration.vibrate(100);
+                     if(jokeType==false){
+                      Vibration.vibrate(100);
+                      alert("Single joke already selected")
+                    }else{
                      singleJoke();
+                    }
 
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Single joke</Text>
@@ -159,8 +166,13 @@ const RandomJokeScreen = () => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={()=>{
-                    Vibration.vibrate(100);
+                    if(jokeType==true){
+                      Vibration.vibrate(100);
+                      alert("Two part joke already selected")
+                    }else{
                     twoPartJoke();
+                    }
+                    
 
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Two part joke</Text>

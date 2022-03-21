@@ -10,13 +10,15 @@ const HomeScreen = (props) => {
         <Text style={styles.homeTitle}>Pick a category</Text>
         <View style={styles.containerForCats1}>
         <TouchableOpacity style={styles.categoryCard} onPress={() => {
-          console.log('Going to component screen');
+          console.log('Going to random jokes screen');
           props.navigation.navigate('Random');
         }}>
         <Text style={styles.catTitles}>Random Joke</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.categoryCard}>
-        <Text style={styles.catTitles}>Programming Jokes</Text>
+        <Text style={styles.catTitles} onPress={() => {
+          console.log('Going to programming jokes screen');
+        }}>Programming Jokes</Text>
         </TouchableOpacity>
         </View>
         <View style={styles.containerForCats2}>
