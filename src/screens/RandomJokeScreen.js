@@ -6,7 +6,7 @@ import axios from 'axios';
 const RandomJokeScreen = () => {
    
     //state variable for joke type
-    const [jokeType, setJokeType] = useState('twoPart');
+    var [jokeType, setJokeType] = useState(true);
 
     //state variable for setup
     var [setupStatevar, setSetupState] = useState("What do you call a developer who doesn't comment code?");
@@ -29,6 +29,7 @@ const RandomJokeScreen = () => {
         setPunchlineState(punchlineArray[count+1]);
         setCount(count+1);
       }else{
+        if(jokeType===true){
       console.log("Element at index 0: "+setupArray[0])
         setCount(count + 1);
         console.log(count);
@@ -48,10 +49,41 @@ const RandomJokeScreen = () => {
           console.log(error);
         });
       }
+        //single joke
+        else if(jokeType===false){
+          console.log("Element at index 0: "+setupArray[0])
+        setCount(count + 1);
+        console.log(count);
+        axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist&type=single', {
+          headers: {
+            Accept: 'application/json'
+          }
+        }).then(response => {
+          setSetupState(response.data.setup);
+          setSetupArray([...setupArray, setupStatevar]);
+
+          console.log(setupArray);
+        }).catch(error => {
+          console.log(error);
+        });
+        }
+      }
       };
 
       function singleJoke(){
-        setJokeType(jokeType = 'single');
+        //set joke type to true
+        setJokeType(jokeType = false);
+        console.log("Joke type: "+ jokeType);
+        //set setup state to setup
+        setSetupState(setupStatevar = "Never date a baker. They're too kneady.");
+      
+      }
+
+      function twoPartJoke(){
+        setJokeType(jokeType = true);
+        console.log("Joke type: "+ jokeType);
+        setSetupState(setupStatevar = "What do you call a developer who doesn't comment code?");
+
       }
 
       function previousJoke() {
@@ -84,11 +116,22 @@ const RandomJokeScreen = () => {
   return (
     <View style={styles.container}>
      <View style={styles.jokesWindow}>
+       {jokeType ? (
      <Text style={styles.jokeSetupTitle}>Setup:</Text>
+       ) : null}
+
+      {jokeType ==false ? (
+      <Text style={styles.jokeSetupTitle}>Joke:</Text>
+      ) : null}
 
         <Text style={styles.jokeTitle}>{setupStatevar}</Text>
+        {jokeType ? (
         <Text style={styles.jokeSetupTitle}>Delivery:</Text>
+        ) : null}
+                {jokeType ? (
         <Text style={styles.jokeTitle}>{punchlineStatevar}</Text>
+        ) : null}
+        
      </View>
         <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button}>
@@ -107,8 +150,8 @@ const RandomJokeScreen = () => {
         <View>
         <Text style={{fontSize:30, textAlign: 'center', fontWeight: 'bold'}}>Select joke type:</Text>
         <TouchableOpacity onPress={()=>{
-                      Vibration.vibrate(100);
-                    //  singleJoke();
+                     Vibration.vibrate(100);
+                     singleJoke();
 
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Single joke</Text>
@@ -117,6 +160,7 @@ const RandomJokeScreen = () => {
 
       <TouchableOpacity onPress={()=>{
                     Vibration.vibrate(100);
+                    twoPartJoke();
 
         }}><View style={styles.jokeTypeButton}>
         <Text style={{color:'white', textAlign:'center', paddingTop:11, fontSize:15}}>Two part joke</Text>
